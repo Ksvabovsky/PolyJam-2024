@@ -35,10 +35,9 @@ public class HandManager : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-        
+
         input.LeftClick += Interact;
     }
-
 
 
     private void FixedUpdate()
@@ -47,7 +46,7 @@ public class HandManager : MonoBehaviour
 
         PointerHandler(ray);
 
-        if(isHolding)
+        if (isHolding)
         {
             Dragging(ray);
         }
@@ -72,10 +71,11 @@ public class HandManager : MonoBehaviour
                 prev.DeHighlightMe();
                 highlitedObject = null;
             }
-           
+
             return;
         }
-        else {
+        else
+        {
             GameObject hited = hit.collider.gameObject;
 
             if (hited == highlitedObject)
@@ -101,14 +101,14 @@ public class HandManager : MonoBehaviour
             }
 
         }
-        
+
     }
 
 
     private void Interact()
     {
-        
-        if(highlitedObject.layer == LayerMask.NameToLayer("Card"))
+
+        if (highlitedObject.layer == LayerMask.NameToLayer("Card"))
         {
             TakeCard();
         }
@@ -130,8 +130,8 @@ public class HandManager : MonoBehaviour
     {
 
         Physics.Raycast(ray, out hit, RaycastRange, Slotmask);
-        Vector3 pos = hit.point + new Vector3(0f,0.05f,0f);
-        ObjectInHand.transform.position = Vector3.Lerp(ObjectInHand.transform.position,pos,Time.deltaTime * 10f); 
+        Vector3 pos = hit.point + new Vector3(0f, 0.05f, 0f);
+        ObjectInHand.transform.position = Vector3.Lerp(ObjectInHand.transform.position, pos, Time.deltaTime * 10f);
         ObjectInHand.transform.rotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
 
 
@@ -143,9 +143,11 @@ public class HandManager : MonoBehaviour
         {
             if (highlitedObject.GetComponent<SlotScript>())
             {
-                ObjectInHand.transform.SetParent(highlitedObject.transform);
-                ObjectInHand.transform.localPosition = Vector3.zero;
-                ObjectInHand.transform.localEulerAngles = Vector3.zero;
+                PutToSlot();
+            }
+            else
+            {
+                returnToHand();
             }
         }
 
@@ -163,188 +165,18 @@ public class HandManager : MonoBehaviour
 
     private void PutToSlot()
     {
-
+        ObjectInHand.transform.SetParent(highlitedObject.transform);
+        ObjectInHand.transform.localPosition = Vector3.zero;
+        ObjectInHand.transform.localEulerAngles = Vector3.zero;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void HandleSlotHighlighting(Ray ray)
-    {
-        if (Physics.Raycast(ray, out slothit, RaycastRange, Slotmask))
-        {
-            SlotInteraction();
-        }
-        else
-        {
-            ClearHighlightedSlot();
-        }
-    }
-
-    private void SlotInteraction()
-    {
-        SlotScript currentSlot = slothit.transform.GetComponent<SlotScript>();
-        if (currentSlot == null) return;
-
-        HighlightCurrentSlot(currentSlot);
-        UpdateSlotPlacement(currentSlot);
-    }
-
-    private void HighlightCurrentSlot(SlotScript currentSlot)
-    {
-        if (canHighlight)
-        {
-            currentSlot.HighlightMe();
-        }
-    }
-
-    private void UpdateSlotPlacement(SlotScript currentSlot)
-    {
-        canBePlaced = true;
-        currentSlotToPlaceCard = slothit.collider.gameObject;
-
-        if (lastHighlightedSlot != null && lastHighlightedSlot != currentSlot)
-        {
-            lastHighlightedSlot.DishighlightMe();
-        }
-
-        lastHighlightedSlot = currentSlot;
-    }
-
-    private void ClearHighlightedSlot()
-    {
-        if (lastHighlightedSlot != null)
-        {
-            canBePlaced = false;
-            lastHighlightedSlot.DishighlightMe();
-            lastHighlightedSlot = null;
-        }
-    }
-
-    private void HandleCardInteraction(Ray ray)
-    {
-        if (Physics.Raycast(ray, out hit, RaycastRange, Cardmask))
-        {
-            highlitedObject = hit.collider.gameObject;
-            ProcessCardRaycastHit(ray);
-        }
-        else if (objectToDrag != null)
-        {
-            objectToDrag.GetComponent<CardDisplay>().stopHovering();
-            objectToDrag = null;
-        }
-    }
-
-    private void ProcessCardRaycastHit(Ray ray)
-    {
-        //Debug.DrawLine(ray.origin, hit.point, Color.green);
-
-        CardScript cardScript = hit.transform.GetComponent<CardScript>();
-        if (cardScript != null && cardScript.CanBeDragged())
-        {
-            PrepareCardForDragging(cardScript);
-        }
-        else
-        {
-            objectToDrag = null;
-            canHighlight = false;
-        }
-
-        HandleMouseEvents(cardScript);
-    }
-
-    private void PrepareCardForDragging(CardScript cardScript)
-    {
-        objectToDrag = hit.transform;
-        canHighlight = true;
-    }
-
-    private void HandleMouseEvents(CardScript cardScript)
-    {
-        if (Input.GetMouseButtonDown(0) && objectToDrag != null)
-        {
-            StartDragging(cardScript);
-        }
-        else if (Input.GetMouseButtonUp(0) && objectToDrag != null)
-        {
-            StopDragging(cardScript);
-        }
-        else
-        {
-            UpdateHoverState();
-        }
-    }
-
-    private void StartDragging(CardScript cardScript)
-    {
-        objectToDrag.GetComponent<CardDisplay>().resetHover();
-        if (cardScript.CanBeDragged())
-            isDragging = true;
-    }
-
-    private void StopDragging(CardScript cardScript)
-    {
-        canHighlight = false;
-        PlaceCardIfPossible(cardScript);
-        isDragging = false;
-        objectToDrag.GetComponent<CardDisplay>().resetHover();
-        objectToDrag.GetComponent<CardDisplay>().stopRotating();
-        objectToDrag = null;
-    }
-
-    private void PlaceCardIfPossible(CardScript cardScript)
-    {
-        if (canBePlaced)
-        {
-            cardScript.PlaceTheCard();
-            if (currentSlotToPlaceCard != null)
-            {
-                objectToDrag.transform.SetParent(currentSlotToPlaceCard.transform);
-                objectToDrag.transform.position = currentSlotToPlaceCard.transform.position;
-            }
-        }
-        else
-        {
-            objectToDrag.position = cardScript.originalPosition;
-        }
-    }
-
-    private void UpdateHoverState()
-    {
-        if (!isDragging && !canBePlaced)
-            hit.transform.GetComponent<CardDisplay>().startHovering();
-        else
-            hit.transform.GetComponent<CardDisplay>().stopHovering();
-    }
-
-    private void HandleCardDragging(Ray ray)
-    {
-        if (isDragging && objectToDrag != null && Physics.Raycast(ray, out hit, RaycastRange, Cardmask))
-        {
-            //Debug.DrawLine(ray.origin, hit.point, Color.yellow);
-            MoveDraggingCard();
-        }
-    }
-
-    private void MoveDraggingCard()
-    {
-        Vector3 newPosition = hit.point;
-        newPosition.y = objectToDrag.transform.GetComponent<CardScript>().originalPosition.y;
-        objectToDrag.position = newPosition;
-
-        objectToDrag.GetComponent<CardDisplay>().startRotating();
-    }
 }
+
+
+
+
+
+
+
+
+
