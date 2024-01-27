@@ -1,5 +1,7 @@
 using System;
+using System.Drawing;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class HandManager : MonoBehaviour
 {
@@ -15,50 +17,62 @@ public class HandManager : MonoBehaviour
     private SlotScript lastHighlightedSlot = null;
     private GameObject currentSlotToPlaceCard = null;
 
+    [SerializeField] InputReader input;
+
     [SerializeField] private GameObject highlitedObject;
     [SerializeField] private GameObject ObjectInHand;
 
+    [SerializeField] private bool isHandFree = true;
+    [SerializeField] private bool isHolding;
+
     private const float RaycastRange = 100f;
+
+    private void Awake()
+    {
+        input = InputReader.instance;
+    }
 
     private void Start()
     {
         cam = Camera.main;
+        
+        input.LeftClick += Interact;
     }
+
+
 
     private void FixedUpdate()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        //HandleSlotHighlighting(ray);
-
-
         PointerHandler(ray);
 
-        //switch
-        // mouse to start card drag
-
-
-
-        //HandleCardInteraction(ray);
-        //HandleCardDragging(ray);
+        if(isHolding)
+        {
+            Dragging(ray);
+        }
     }
 
 
     private void PointerHandler(Ray ray)
     {
-        
+        LayerMask mask = Cardmask;
 
         RaycastHit hit;
-        Physics.Raycast(ray, out hit, RaycastRange, Cardmask);
+        if (isHolding)
+        {
+            mask = Slotmask;
+        }
+        Physics.Raycast(ray, out hit, RaycastRange, mask);
         if (hit.collider == null)
         {
             if (highlitedObject != null)
             {
-                Selectable prev = highlitedObject.GetComponent<Selectable>();
+                Highlightable prev = highlitedObject.GetComponent<Highlightable>();
                 prev.DeHighlightMe();
+                highlitedObject = null;
             }
-            
-            highlitedObject = null;
+           
             return;
         }
         else {
@@ -72,19 +86,101 @@ public class HandManager : MonoBehaviour
             {
                 if (highlitedObject != null)
                 {
-                    if (highlitedObject != null)
+                    if (highlitedObject.GetComponent<Highlightable>())
                     {
-                        Selectable prev = highlitedObject.GetComponent<Selectable>();
+                        Highlightable prev = highlitedObject.GetComponent<Highlightable>();
                         prev.DeHighlightMe();
                     }
                 }
                 highlitedObject = hited;
-                highlitedObject.GetComponent<Selectable>().DeHighlightMe();
+                if (highlitedObject.GetComponent<Highlightable>())
+                {
+                    highlitedObject.GetComponent<Highlightable>().HighlightMe();
+                }
+
             }
 
         }
         
     }
+
+
+    private void Interact()
+    {
+        
+        if(highlitedObject.layer == LayerMask.NameToLayer("Card"))
+        {
+            TakeCard();
+        }
+    }
+
+    private void TakeCard()
+    {
+        Debug.Log("Chuj");
+        ObjectInHand = highlitedObject;
+        highlitedObject = null;
+        isHandFree = false;
+        isHolding = true;
+
+        input.LeftClick -= Interact;
+        input.LeftClickRelase += DropCard;
+    }
+
+    private void Dragging(Ray ray)
+    {
+
+        Physics.Raycast(ray, out hit, RaycastRange, Slotmask);
+        Vector3 pos = hit.point + new Vector3(0f,0.05f,0f);
+        ObjectInHand.transform.position = Vector3.Lerp(ObjectInHand.transform.position,pos,Time.deltaTime * 10f); 
+        ObjectInHand.transform.rotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
+
+
+    }
+
+    private void DropCard()
+    {
+        if (highlitedObject)
+        {
+            if (highlitedObject.GetComponent<SlotScript>())
+            {
+                ObjectInHand.transform.SetParent(highlitedObject.transform);
+                ObjectInHand.transform.localPosition = Vector3.zero;
+                ObjectInHand.transform.localEulerAngles = Vector3.zero;
+            }
+        }
+
+        isHolding = false;
+        ObjectInHand = null;
+        highlitedObject = null;
+        input.LeftClick += Interact;
+
+    }
+
+    private void returnToHand()
+    {
+
+    }
+
+    private void PutToSlot()
+    {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void HandleSlotHighlighting(Ray ray)
     {
@@ -154,7 +250,7 @@ public class HandManager : MonoBehaviour
 
     private void ProcessCardRaycastHit(Ray ray)
     {
-        Debug.DrawLine(ray.origin, hit.point, Color.green);
+        //Debug.DrawLine(ray.origin, hit.point, Color.green);
 
         CardScript cardScript = hit.transform.GetComponent<CardScript>();
         if (cardScript != null && cardScript.CanBeDragged())
@@ -238,7 +334,7 @@ public class HandManager : MonoBehaviour
     {
         if (isDragging && objectToDrag != null && Physics.Raycast(ray, out hit, RaycastRange, Cardmask))
         {
-            Debug.DrawLine(ray.origin, hit.point, Color.yellow);
+            //Debug.DrawLine(ray.origin, hit.point, Color.yellow);
             MoveDraggingCard();
         }
     }
