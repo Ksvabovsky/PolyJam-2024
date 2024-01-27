@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 39081151}
   - component: {fileID: 39081150}
   - component: {fileID: 39081149}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: place5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4b8fb866cf2c984db8ae1daf2426350, type: 2}
+  - {fileID: 2100000, guid: 352fe32cc64506e4d9e476d114a584e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 228672608}
   - component: {fileID: 228672607}
   - component: {fileID: 228672606}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: place4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4b8fb866cf2c984db8ae1daf2426350, type: 2}
+  - {fileID: 2100000, guid: 352fe32cc64506e4d9e476d114a584e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 476649387}
   - component: {fileID: 476649386}
   - component: {fileID: 476649385}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: place3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +545,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4b8fb866cf2c984db8ae1daf2426350, type: 2}
+  - {fileID: 2100000, guid: 352fe32cc64506e4d9e476d114a584e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -619,6 +619,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2d48de7f3e91e45854cfe1103a5c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 1024
+  cardFirstPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &731022169
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,7 +683,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c4bcb740e89c5e49ae4f62c30f23a64, type: 2}
+  - {fileID: 2100000, guid: 1e026cdf37b71414b987c3d6661fbeff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -742,7 +746,7 @@ GameObject:
   - component: {fileID: 1219868928}
   - component: {fileID: 1219868927}
   - component: {fileID: 1219868926}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +915,7 @@ GameObject:
   - component: {fileID: 1496274067}
   - component: {fileID: 1496274066}
   - component: {fileID: 1496274065}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: place1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,7 +978,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4b8fb866cf2c984db8ae1daf2426350, type: 2}
+  - {fileID: 2100000, guid: 352fe32cc64506e4d9e476d114a584e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1134,7 +1138,7 @@ GameObject:
   - component: {fileID: 2046703243}
   - component: {fileID: 2046703242}
   - component: {fileID: 2046703241}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: place2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1197,7 +1201,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4b8fb866cf2c984db8ae1daf2426350, type: 2}
+  - {fileID: 2100000, guid: 352fe32cc64506e4d9e476d114a584e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
