@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 3261179572277867045}
   - component: {fileID: 6158048575658605441}
   m_Layer: 0
-  m_Name: ExampleCard
+  m_Name: TwojaStaraPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
