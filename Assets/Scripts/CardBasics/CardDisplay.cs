@@ -14,7 +14,7 @@ public class CardDisplay : MonoBehaviour
     public CardTemplate card;
 
     private float maxHoverDistance = 0.3f;
-    private float moveByDistance = 0.0f;
+    public float moveByDistance = 0.0f;
     public float currentHoverDistance = 0.0f;
     public float hoverSpeed;
     public bool isHovered = false;
@@ -48,10 +48,11 @@ public class CardDisplay : MonoBehaviour
 
                 currentHoverDistance += moveByDistance;
 
-                if (currentHoverDistance >= maxHoverDistance)
+                if (currentHoverDistance > maxHoverDistance)
                 {
 
                     moveByDistance = currentHoverDistance - maxHoverDistance;
+                    currentHoverDistance = maxHoverDistance;
                 }
 
                 newPosition.y += moveByDistance;
@@ -70,8 +71,8 @@ public class CardDisplay : MonoBehaviour
 
                 if (currentHoverDistance < 0)
                 {
-
                     moveByDistance = -currentHoverDistance;
+                    currentHoverDistance = 0.0f;
                 }
 
                 newPosition.y -= moveByDistance;

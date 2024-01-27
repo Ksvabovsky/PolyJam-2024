@@ -33,6 +33,8 @@ public class HandManager : MonoBehaviour
             {
                 newObject = false;
                 cardFirstPosition = hit.transform.position;
+                yCardPos = hit.transform.position.y;
+                Debug.Log(yCardPos + " initRaycats");
             }
 
             Debug.Log(hit.transform.name);
@@ -70,7 +72,7 @@ public class HandManager : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit, 100, mask))
             {
-                Debug.DrawLine(ray.origin, hit.point, Color.green);
+                Debug.DrawLine(ray.origin, hit.point, Color.yellow);
 
             }
 
@@ -94,10 +96,12 @@ public class HandManager : MonoBehaviour
             dla mnie bez problemu, a i dlaczego nie pisze tego np na mesie? Przed chwil¹ siê zczai³em 
             ¿e bym móg³ ale mi sie nie chce. Powodzeniaaaaaaa
             */
+
+
             Vector3 newPosition = hit.point;
             //newPosition.z = cardFirstPosition.z + (newPosition.y-cardFirstPosition.y)*1.15f;
             newPosition.y = yCardPos;
-            Debug.Log(newPosition.y);
+            Debug.Log(yCardPos);
             objectToDrag.position = newPosition;
 
             objectToDrag.GetComponent<CardDisplay>().startRotating();
