@@ -6,16 +6,12 @@ using UnityEngine.Rendering.Universal;
 public class HandManager : MonoBehaviour
 {
     private Camera cam;
+    [SerializeField] private CameraController controller;
+
     [SerializeField] private LayerMask Cardmask;
     [SerializeField] private LayerMask Slotmask;
     private RaycastHit hit;
-    private RaycastHit slothit;
-    private Transform objectToDrag;
-    private bool isDragging = false;
-    private bool canBePlaced = false;
-    private bool canHighlight = false;
-    private SlotScript lastHighlightedSlot = null;
-    private GameObject currentSlotToPlaceCard = null;
+
 
     [SerializeField] InputReader input;
 
@@ -133,12 +129,17 @@ public class HandManager : MonoBehaviour
         Vector3 pos = hit.point + new Vector3(0f, 0.05f, 0f);
         ObjectInHand.transform.position = Vector3.Lerp(ObjectInHand.transform.position, pos, Time.deltaTime * 10f);
         ObjectInHand.transform.rotation = Quaternion.FromToRotation(-Vector3.forward, hit.normal);
-
+        if (Input.mousePosition.y > 200f)
+        {
+            controller.MoveToTable();
+        }
 
     }
 
     private void DropCard()
     {
+
+        controller.MoveToDeck();
         if (highlitedObject)
         {
             if (highlitedObject.GetComponent<SlotScript>())
