@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterTemplate", menuName = "Characters/Templates/CharacterSO", order = 1)]
 public class CharacterTemplate : ScriptableObject
 {
-    public string name;
+    public string characterName;
     public List<AudioClip> voiceClips = new List<AudioClip>();
 
     public AudioClip GetVoiceClip()
