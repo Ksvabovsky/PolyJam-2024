@@ -78,8 +78,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 3005310581817251525}
   - component: {fileID: 1159949215033450441}
   m_Layer: 10
-  m_Name: Card
+  m_Name: Janusz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -633,7 +633,7 @@ MonoBehaviour:
   funPointsText: {fileID: 3935369705842763671}
   sprite: {fileID: 7873640882423496645}
   frontSprite: {fileID: 522710479339919239}
-  card: {fileID: 11400000, guid: 0d285c895c666904394b6b75554d9878, type: 2}
+  card: {fileID: 11400000, guid: 5276eeb87739587409a796068be86a6c, type: 2}
   moveByDistance: 0
   currentHoverDistance: 0
   hoverSpeed: 0
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
