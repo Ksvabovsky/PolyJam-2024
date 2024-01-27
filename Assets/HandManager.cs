@@ -95,6 +95,12 @@ public class HandManager : MonoBehaviour
             i siê na niej wzorujecie, no chyba ¿e w czasie jak bede mimimi to na inny pomys³ wpadniecie
             dla mnie bez problemu, a i dlaczego nie pisze tego np na mesie? Przed chwil¹ siê zczai³em 
             ¿e bym móg³ ale mi sie nie chce. Powodzeniaaaaaaa
+
+
+            update: godzina 8:13
+            ma to zwi¹zek jakiœ z moimi wywo³ywaniami funkcji, jeœli podczas rotacji raycast zgubi karte
+            i zrobi sie clickUp to lokuje sobie position Y, czemu nie mam pojêcia ale szukam i to jest
+            co znalaz³em
             */
 
 
