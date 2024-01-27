@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HandManager : MonoBehaviour
@@ -14,6 +15,9 @@ public class HandManager : MonoBehaviour
     private SlotScript lastHighlightedSlot = null;
     private GameObject currentSlotToPlaceCard = null;
 
+    [SerializeField] private GameObject highlitedObject;
+    [SerializeField] private GameObject ObjectInHand;
+
     private const float RaycastRange = 100f;
 
     private void Start()
@@ -25,9 +29,61 @@ public class HandManager : MonoBehaviour
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        HandleSlotHighlighting(ray);
-        HandleCardInteraction(ray);
-        HandleCardDragging(ray);
+        //HandleSlotHighlighting(ray);
+
+
+        PointerHandler(ray);
+
+        //switch
+        // mouse to start card drag
+
+
+
+        //HandleCardInteraction(ray);
+        //HandleCardDragging(ray);
+    }
+
+
+    private void PointerHandler(Ray ray)
+    {
+        
+
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit, RaycastRange, Cardmask);
+        if (hit.collider == null)
+        {
+            if (highlitedObject != null)
+            {
+                Selectable prev = highlitedObject.GetComponent<Selectable>();
+                prev.DeHighlightMe();
+            }
+            
+            highlitedObject = null;
+            return;
+        }
+        else {
+            GameObject hited = hit.collider.gameObject;
+
+            if (hited == highlitedObject)
+            {
+                return;
+            }
+            else
+            {
+                if (highlitedObject != null)
+                {
+                    if (highlitedObject != null)
+                    {
+                        Selectable prev = highlitedObject.GetComponent<Selectable>();
+                        prev.DeHighlightMe();
+                    }
+                }
+                highlitedObject = hited;
+                highlitedObject.GetComponent<Selectable>().DeHighlightMe();
+            }
+
+        }
+        
     }
 
     private void HandleSlotHighlighting(Ray ray)
@@ -86,6 +142,7 @@ public class HandManager : MonoBehaviour
     {
         if (Physics.Raycast(ray, out hit, RaycastRange, Cardmask))
         {
+            highlitedObject = hit.collider.gameObject;
             ProcessCardRaycastHit(ray);
         }
         else if (objectToDrag != null)
