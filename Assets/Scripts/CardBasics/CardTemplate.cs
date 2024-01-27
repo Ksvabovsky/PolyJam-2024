@@ -12,6 +12,7 @@ public class CardTemplate : ScriptableObject
     public string nameText;
     public string descriptionText;
     public Texture cardSprite;
+    public Texture cardFrontSprite;
     public CardTemplate nextCard;
 
     public int funScore;

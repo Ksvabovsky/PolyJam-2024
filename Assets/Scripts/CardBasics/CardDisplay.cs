@@ -11,6 +11,7 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
     public RawImage sprite;
+    public RawImage frontSprite;
     public CardTemplate card;
 
     private float maxHoverDistance = 0.3f;
@@ -29,6 +30,7 @@ public class CardDisplay : MonoBehaviour
         nameText.text = card.nameText;
         descriptionText.text = card.descriptionText;
         sprite.texture = card.cardSprite;
+        frontSprite.texture = card.cardFrontSprite;
 
         currentHoverDistance = 0.0f;
         defaultRotation = transform.rotation.eulerAngles.x;
