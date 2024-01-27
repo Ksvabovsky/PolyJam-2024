@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2364b3fee34789743b3aeb1ba2afef68, type: 3}
+  m_Name: ClownCharacter
+  m_EditorClassIdentifier: 
+  name: Sicko The Clown
+  voiceClips:
+  - {fileID: 8300000, guid: 97a2a6e298cc2874ab9cf7debcccf1c9, type: 3}
+  - {fileID: 8300000, guid: 7761c66104e06974c823b3e62950d893, type: 3}
+  - {fileID: 8300000, guid: 1a8ed7cea7c2f50418e2ce7fa4339d6b, type: 3}
+  - {fileID: 8300000, guid: a8a755422b43f4f4687c46e0c5651999, type: 3}
+  - {fileID: 8300000, guid: bcd9a40818cb99e499c14a336c20cef7, type: 3}
+  - {fileID: 8300000, guid: a6c5181645fd27540b39a52fe004cad9, type: 3}

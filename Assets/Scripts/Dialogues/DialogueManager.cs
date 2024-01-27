@@ -8,8 +8,10 @@ public class DialogueManager : MonoBehaviour
     public float letterTick = 0.1f;
     public TextMeshProUGUI dialogueText;
     public Animator animator;
+    public AudioSource audioSource;
     Queue<string> dialogueQueue = new Queue<string>();
-    // Update is called once per frame
+    public CharacterTemplate currentTalkingCharacter;
+
     public void StartDialogue(Dialogue dialogueList)
     {
         animator.SetBool("IsOpen", true);
@@ -19,7 +21,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueQueue.Enqueue(sentence);
         }
-
+        currentTalkingCharacter = dialogueList.character;
         DisplayNextSentence();
     }
 
@@ -30,7 +32,6 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-
         
         string sentance = dialogueQueue.Dequeue();
         StopAllCoroutines();
@@ -39,10 +40,17 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence, float talkTick)
     {
+
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
+            if (char.IsLetterOrDigit(letter))
+            {
+                audioSource.clip = currentTalkingCharacter.GetVoiceClip();
+                audioSource.pitch = Random.Range(1.5f, 1.8f);
+                audioSource.Play();
+            }
             yield return new WaitForSeconds(talkTick);
         }
     }
