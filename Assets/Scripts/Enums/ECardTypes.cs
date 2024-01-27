@@ -7,5 +7,7 @@ public enum ECardTypes
     Default,
     Person,
     Location,
+    Action,
+    Connector,
     Spell    
 }

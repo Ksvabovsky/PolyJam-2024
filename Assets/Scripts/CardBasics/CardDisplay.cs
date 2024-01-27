@@ -36,6 +36,8 @@ public class CardDisplay : MonoBehaviour
         defaultRotation = transform.rotation.eulerAngles.x;
         rotationSpeed = 140.0f;
         hoverSpeed = 5.0f;
+
+        card.InvokeAction();
     }
 
     private void FixedUpdate()

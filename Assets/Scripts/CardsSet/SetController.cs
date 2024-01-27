@@ -9,6 +9,12 @@ public class SetController : MonoBehaviour
     private int scoreMultiplier = 1;
     private int setScore = 0;
 
+    public void AddCard(GameObject card)
+    {
+        cards.Add(card);
+        card.GetComponent<CardTemplate>().InvokeAction();
+    }
+
     public void CompleteSet()
     {
         foreach(GameObject card in cards)
@@ -30,7 +36,7 @@ public class SetController : MonoBehaviour
     }
 
     public bool HasSynergy()
-    {
+    {/*
         CardTemplate firstCardData = cards[cards.Count - 2].GetComponent<CardTemplate>();
         CardTemplate secondCardData = cards[cards.Count - 1].GetComponent<CardTemplate>();
         if (firstCardData.synergyType != ECardTypes.Default)
@@ -40,7 +46,7 @@ public class SetController : MonoBehaviour
                 scoreMultiplier++;
             }
         }
-
+        */
         return true;
     }
 }

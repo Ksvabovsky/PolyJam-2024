@@ -17,16 +17,16 @@ public class CardTemplate : ScriptableObject
 
     public int funScore;
     public ECardTypes cardType;
-    public ECardTypes synergyType;
+    public List<ECardTypes> synergyType;
 
-    public UnityEvent onDoSomething;
-    public void addCard(CardTemplate card)
+    public UnityEvent acionInvoker;
+    public void AddCard(CardTemplate card)
     {
         nextCard = card;
     }
 
-    public void NieOnEnable()
+    public void InvokeAction()
     {
-        onDoSomething.Invoke();
+        acionInvoker.Invoke();
     }
 }
