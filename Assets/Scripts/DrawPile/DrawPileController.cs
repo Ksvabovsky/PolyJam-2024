@@ -15,7 +15,7 @@ public class DrawPileController : MonoBehaviour
     {
         drawPileCards.Add(card);
         card.transform.SetParent(transform, true);
-        card.transform.Rotate(90.0f, 0, 0);
+        card.transform.Rotate(-90.0f, 0, 0);
         card.transform.position = currentGrow;
         currentGrow += growDirection;
     }

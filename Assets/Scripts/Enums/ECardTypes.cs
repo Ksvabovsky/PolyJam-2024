@@ -4,7 +4,6 @@ using UnityEngine;
 
 public enum ECardTypes
 {
-    Default,
     Person,
     Location,
     Action,

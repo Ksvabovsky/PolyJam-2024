@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SetController : MonoBehaviour
@@ -12,8 +13,79 @@ public class SetController : MonoBehaviour
     public void AddCard(GameObject card)
     {
         cards.Add(card);
+        InitializeCard(card);
+    }
+
+    public bool CanCardBePlaced(GameObject newCard)
+    {
+        List<ECardTypes> cardOrder = new List<ECardTypes> {
+            ECardTypes.Person,
+            ECardTypes.Action,
+            ECardTypes.Location,
+            ECardTypes.Connector
+        };
+
+        CardTemplate lastCardProperties = cards.Last().GetComponent<CardTemplate>();
+        CardTemplate newCardProperties = newCard.GetComponent<CardTemplate>();
+
+        int connectorAmount = cards.FindAll(x => x.GetComponent<CardTemplate>().cardType == ECardTypes.Connector).Count;
+
+        if (connectorAmount == 0) return false;
+
+        if((int)newCardProperties.cardType == (((int)lastCardProperties.cardType + 1) % cardOrder.Count)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public int CheckSetSynergies() 
+    {
+        for(int i = 1; i < cards.Count; i++)
+        {
+            int synergyAmount = CountCardSynergy(cards[i-1], cards[i]);
+            scoreMultiplier += synergyAmount;
+        } 
+
+        return 0;
+    }
+
+    public int CountCardSynergy(GameObject card1, GameObject card2)
+    {
+        CardTemplate card1Properties = card1.GetComponent<CardTemplate>();
+        CardTemplate card2Properties = card2.GetComponent<CardTemplate>();
+        int synergies = 0;
+
+        if (card1Properties.synergyType.Contains(card2Properties.cardType))
+        {
+            synergies++;
+        }
+        if (card2Properties.synergyType.Contains(card1Properties.cardType))
+        {
+            synergies++;
+        }
+
+        return synergies;
+    }
+    
+    public void InitializeCard(GameObject card)
+    {
         card.GetComponent<CardTemplate>().InvokeAction();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void CompleteSet()
     {
