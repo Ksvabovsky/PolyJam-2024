@@ -24,7 +24,7 @@ public class CardTemplate : ScriptableObject
         nextCard = card;
     }
 
-    public void OnEnable()
+    public void NieOnEnable()
     {
         onDoSomething.Invoke();
     }
