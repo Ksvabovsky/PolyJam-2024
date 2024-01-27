@@ -1,118 +1,197 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class HandManager : MonoBehaviour
 {
-    Camera cam;
-    [SerializeField] LayerMask mask;
-    RaycastHit hit;
-    Transform objectToDrag;
-    bool isDragging = false;
-    bool newObject = true;
-    public Vector3 cardFirstPosition;
+    private Camera cam;
+    [SerializeField] private LayerMask Cardmask;
+    [SerializeField] private LayerMask Slotmask;
+    private RaycastHit hit;
+    private RaycastHit slothit;
+    private Transform objectToDrag;
+    private bool isDragging = false;
+    private bool canBePlaced = false;
+    private bool canHighlight = false;
+    private SlotScript lastHighlightedSlot = null;
+    private GameObject currentSlotToPlaceCard = null;
 
-    private float yCardPos;
+    private const float RaycastRange = 100f;
 
     private void Start()
     {
         cam = Camera.main;
     }
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
-        //Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit);
-        //Debug.DrawRay(transform.position, mousePosition - transform.position, Color.blue);
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 100, mask))
+        HandleSlotHighlighting(ray);
+        HandleCardInteraction(ray);
+        HandleCardDragging(ray);
+    }
+
+    private void HandleSlotHighlighting(Ray ray)
+    {
+        if (Physics.Raycast(ray, out slothit, RaycastRange, Slotmask))
         {
-            Debug.DrawLine(ray.origin, hit.point, Color.green);
+            SlotInteraction();
+        }
+        else
+        {
+            ClearHighlightedSlot();
+        }
+    }
 
-            if (newObject)
-            {
-                newObject = false;
-                cardFirstPosition = hit.transform.position;
-                yCardPos = hit.transform.position.y;
-                Debug.Log(yCardPos + " initRaycats");
-            }
+    private void SlotInteraction()
+    {
+        SlotScript currentSlot = slothit.transform.GetComponent<SlotScript>();
+        if (currentSlot == null) return;
 
-            Debug.Log(hit.transform.name);
-            objectToDrag = hit.transform;
+        HighlightCurrentSlot(currentSlot);
+        UpdateSlotPlacement(currentSlot);
+    }
 
-            if(Input.GetMouseButtonDown(0))
+    private void HighlightCurrentSlot(SlotScript currentSlot)
+    {
+        if (canHighlight)
+        {
+            currentSlot.HighlightMe();
+        }
+    }
+
+    private void UpdateSlotPlacement(SlotScript currentSlot)
+    {
+        canBePlaced = true;
+        currentSlotToPlaceCard = slothit.collider.gameObject;
+
+        if (lastHighlightedSlot != null && lastHighlightedSlot != currentSlot)
+        {
+            lastHighlightedSlot.DishighlightMe();
+        }
+
+        lastHighlightedSlot = currentSlot;
+    }
+
+    private void ClearHighlightedSlot()
+    {
+        if (lastHighlightedSlot != null)
+        {
+            canBePlaced = false;
+            lastHighlightedSlot.DishighlightMe();
+            lastHighlightedSlot = null;
+        }
+    }
+
+    private void HandleCardInteraction(Ray ray)
+    {
+        if (Physics.Raycast(ray, out hit, RaycastRange, Cardmask))
+        {
+            ProcessCardRaycastHit(ray);
+        }
+        else if (objectToDrag != null)
+        {
+            objectToDrag.GetComponent<CardDisplay>().stopHovering();
+            objectToDrag = null;
+        }
+    }
+
+    private void ProcessCardRaycastHit(Ray ray)
+    {
+        Debug.DrawLine(ray.origin, hit.point, Color.green);
+
+        CardScript cardScript = hit.transform.GetComponent<CardScript>();
+        if (cardScript != null && cardScript.CanBeDragged())
+        {
+            PrepareCardForDragging(cardScript);
+        }
+        else
+        {
+            objectToDrag = null;
+            canHighlight = false;
+        }
+
+        HandleMouseEvents(cardScript);
+    }
+
+    private void PrepareCardForDragging(CardScript cardScript)
+    {
+        objectToDrag = hit.transform;
+        canHighlight = true;
+    }
+
+    private void HandleMouseEvents(CardScript cardScript)
+    {
+        if (Input.GetMouseButtonDown(0) && objectToDrag != null)
+        {
+            StartDragging(cardScript);
+        }
+        else if (Input.GetMouseButtonUp(0) && objectToDrag != null)
+        {
+            StopDragging(cardScript);
+        }
+        else
+        {
+            UpdateHoverState();
+        }
+    }
+
+    private void StartDragging(CardScript cardScript)
+    {
+        objectToDrag.GetComponent<CardDisplay>().resetHover();
+        if (cardScript.CanBeDragged())
+            isDragging = true;
+    }
+
+    private void StopDragging(CardScript cardScript)
+    {
+        canHighlight = false;
+        PlaceCardIfPossible(cardScript);
+        isDragging = false;
+        objectToDrag.GetComponent<CardDisplay>().resetHover();
+        objectToDrag.GetComponent<CardDisplay>().stopRotating();
+        objectToDrag = null;
+    }
+
+    private void PlaceCardIfPossible(CardScript cardScript)
+    {
+        if (canBePlaced)
+        {
+            cardScript.PlaceTheCard();
+            if (currentSlotToPlaceCard != null)
             {
-                isDragging = true;
-                objectToDrag.GetComponent<CardDisplay>().resetHover();
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                isDragging = false;
-                objectToDrag.GetComponent<CardDisplay>().resetHover();
-                objectToDrag.GetComponent<CardDisplay>().stopRotating();
-                objectToDrag = null;
-                newObject = true;
-            }
-            else
-            {
-                if(!isDragging)
-                    hit.transform.GetComponent<CardDisplay>().startHovering();
+                objectToDrag.transform.SetParent(currentSlotToPlaceCard.transform);
+                objectToDrag.transform.position = currentSlotToPlaceCard.transform.position;
             }
         }
         else
         {
-            if(objectToDrag != null)
-            {
-                objectToDrag.GetComponent<CardDisplay>().stopHovering();
-                objectToDrag = null;
-            }
+            objectToDrag.position = cardScript.originalPosition;
         }
-
-        if(isDragging && objectToDrag != null)
-        {
-            if (Physics.Raycast(ray, out hit, 100, mask))
-            {
-                Debug.DrawLine(ray.origin, hit.point, Color.yellow);
-
-            }
-
-            /*Pa³aszek, jesli to czytasz to znaczy jedn¹ z dwóch rzeczy
-             albo mi siê uda³o i odszed³em z tego œwiata
-            albo tylko zrzek³em siê twojego zadania na twoj¹ czêœæ
-            tak czy siak ¿yczê ci powodzenia i mi³ej zabawy
-
-            ps.
-            branie .position z raycasta chrzani w jakiœ sposób poruszanie kart¹ bo nie da siê zablokowaæ
-            wzglêdem jednej zz osi a mia³em pomys³ ¿eby zablokowac y
-            i wy³apywaæ kartê colliderami które trzeba umieœciæ nad "placeForCard" (poki co nazywaja sie tylko place)
-            jak wy³apie to powinno snapowaæ do takiego miejsca ale wcia¿ jeœli przytrzynujesz myszke
-            i wyjdziesz raycastem poza tego collidera place'a to spowrotem poruszasz kartê myszk¹
-            
-            Odnoœnie samej karty jakby by³y rozkminy, s¹ 2 klasy, scriptable object - CardTemplate
-            (klikasz prawym -> create -> cards -> templates -> cardsSO) jest od danych
-            (jak np sprite karty, jej szczególny obrazek) i jest CardDisplay który
-            skleja prefaba z CardTemplatem, no i jest przyk³adowa Karta w prefabach, j¹ duplikujecie
-            i siê na niej wzorujecie, no chyba ¿e w czasie jak bede mimimi to na inny pomys³ wpadniecie
-            dla mnie bez problemu, a i dlaczego nie pisze tego np na mesie? Przed chwil¹ siê zczai³em 
-            ¿e bym móg³ ale mi sie nie chce. Powodzeniaaaaaaa
-
-
-            update: godzina 8:13
-            ma to zwi¹zek jakiœ z moimi wywo³ywaniami funkcji, jeœli podczas rotacji raycast zgubi karte
-            i zrobi sie clickUp to lokuje sobie position Y, czemu nie mam pojêcia ale szukam i to jest
-            co znalaz³em
-            */
-
-
-            Vector3 newPosition = hit.point;
-            //newPosition.z = cardFirstPosition.z + (newPosition.y-cardFirstPosition.y)*1.15f;
-            newPosition.y = yCardPos;
-            Debug.Log(yCardPos);
-            objectToDrag.position = newPosition;
-
-            objectToDrag.GetComponent<CardDisplay>().startRotating();
-        }
-
     }
 
+    private void UpdateHoverState()
+    {
+        if (!isDragging && !canBePlaced)
+            hit.transform.GetComponent<CardDisplay>().startHovering();
+        else
+            hit.transform.GetComponent<CardDisplay>().stopHovering();
+    }
+
+    private void HandleCardDragging(Ray ray)
+    {
+        if (isDragging && objectToDrag != null && Physics.Raycast(ray, out hit, RaycastRange, Cardmask))
+        {
+            Debug.DrawLine(ray.origin, hit.point, Color.yellow);
+            MoveDraggingCard();
+        }
+    }
+
+    private void MoveDraggingCard()
+    {
+        Vector3 newPosition = hit.point;
+        newPosition.y = objectToDrag.transform.GetComponent<CardScript>().originalPosition.y;
+        objectToDrag.position = newPosition;
+
+        objectToDrag.GetComponent<CardDisplay>().startRotating();
+    }
 }

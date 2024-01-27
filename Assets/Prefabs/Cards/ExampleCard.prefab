@@ -291,7 +291,6 @@ GameObject:
   - component: {fileID: 6606560775649398298}
   - component: {fileID: 1151919095592393369}
   - component: {fileID: 3261179572277867045}
-  - component: {fileID: 1420673288491028627}
   m_Layer: 0
   m_Name: ExampleCard
   m_TagString: Untagged
@@ -339,6 +338,7 @@ MonoBehaviour:
   descriptionText: {fileID: 3919012824745571215}
   sprite: {fileID: 6214483444974047164}
   card: {fileID: 11400000, guid: 0d285c895c666904394b6b75554d9878, type: 2}
+  moveByDistance: 0
   currentHoverDistance: 0
   hoverSpeed: 0
   isHovered: 0
@@ -366,21 +366,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 100.14479, y: 94.65216, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1420673288491028627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6069758302542354462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920fcc35dc073d241b168766b1c7026e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layer:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!1 &8892877775127902067
 GameObject:
   m_ObjectHideFlags: 0
