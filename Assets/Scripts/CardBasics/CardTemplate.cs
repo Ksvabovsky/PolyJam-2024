@@ -13,7 +13,10 @@ public class CardTemplate : ScriptableObject
     public string descriptionText;
     public Texture cardSprite;
     public CardTemplate nextCard;
+
+    public int funScore;
     public ECardTypes cardType;
+    public ECardTypes synergyType;
 
     public UnityEvent onDoSomething;
     public void addCard(CardTemplate card)
