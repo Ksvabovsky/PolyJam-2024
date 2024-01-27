@@ -10,6 +10,7 @@ public class CardDisplay : MonoBehaviour
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI funPointsText;
     public RawImage sprite;
     public RawImage frontSprite;
     public CardTemplate card;
@@ -31,6 +32,8 @@ public class CardDisplay : MonoBehaviour
         descriptionText.text = card.descriptionText;
         sprite.texture = card.cardSprite;
         frontSprite.texture = card.cardFrontSprite;
+        funPointsText.text = card.funScore.ToString();
+        
 
         currentHoverDistance = 0.0f;
         defaultRotation = transform.rotation.eulerAngles.x;

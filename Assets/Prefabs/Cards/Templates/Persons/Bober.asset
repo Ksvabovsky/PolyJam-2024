@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21e2085df30ff9849a7a41db4e9b4141, type: 3}
+  m_Name: Bober
+  m_EditorClassIdentifier: 
+  id: 3
+  nameText: Bober
+  descriptionText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+  cardSprite: {fileID: 2800000, guid: 4fad5aeef8c3d45488cc0fd7659c79b3, type: 3}
+  cardFrontSprite: {fileID: 2800000, guid: 86cc003ec58916b49bffe4550c73e405, type: 3}
+  nextCard: {fileID: 0}
+  funScore: 4
+  cardType: 1
+  synergyType: 
+  acionInvoker:
+    m_PersistentCalls:
+      m_Calls: []
