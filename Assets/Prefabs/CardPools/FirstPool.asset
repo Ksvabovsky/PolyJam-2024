@@ -13,5 +13,16 @@ MonoBehaviour:
   m_Name: FirstPool
   m_EditorClassIdentifier: 
   cardPool:
-  - {fileID: 6069758302542354462, guid: 1d0d9e66eb037dd4fbf5d17e2e6d4b7c, type: 3}
-  - {fileID: 6069758302542354462, guid: 1d0d9e66eb037dd4fbf5d17e2e6d4b7c, type: 3}
+  - {fileID: 4105435647811979384, guid: c04188b83d5c5094fb399ed6f301f64d, type: 3}
+  - {fileID: 4105435647811979384, guid: c04188b83d5c5094fb399ed6f301f64d, type: 3}
+  - {fileID: 4105435647811979384, guid: 7a6b8d2c02f257d41934f05825f89f90, type: 3}
+  - {fileID: 4105435647811979384, guid: 7a6b8d2c02f257d41934f05825f89f90, type: 3}
+  - {fileID: 4105435647811979384, guid: c0c30208272f0ae42b87d9aac53e3d65, type: 3}
+  - {fileID: 4105435647811979384, guid: c0c30208272f0ae42b87d9aac53e3d65, type: 3}
+  cardPoolCopy:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

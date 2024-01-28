@@ -32,7 +32,7 @@ public class DrawPileController : MonoBehaviour
     void Start()
     {
         currentGrow = transform.position;
-        growDirection.y = 5.0f;
+        growDirection.y = 0.01f;
 
         List<GameObject> cardPoolCards = cardPool.getPool();
 

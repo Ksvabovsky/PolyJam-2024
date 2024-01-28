@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21e2085df30ff9849a7a41db4e9b4141, type: 3}
-  m_Name: TwojaStara
+  m_Name: Warsztat
   m_EditorClassIdentifier: 
   id: 10
-  nameText: Twoja Stara
+  nameText: W warsztacie
   descriptionText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-  cardSprite: {fileID: 2800000, guid: 635e18545f39e4a47b0d78bf41889950, type: 3}
-  cardFrontSprite: {fileID: 2800000, guid: 86cc003ec58916b49bffe4550c73e405, type: 3}
+  cardSprite: {fileID: 2800000, guid: 5c1795bc142622643bee60a472f8f4d0, type: 3}
+  cardFrontSprite: {fileID: 2800000, guid: fe67b8fb07f00f34aa6571665da5c011, type: 3}
   nextCard: {fileID: 0}
-  funScore: 6
-  cardType: 0
+  funScore: 2
+  cardType: 2
   synergyType: 
   acionInvoker:
     m_PersistentCalls:
