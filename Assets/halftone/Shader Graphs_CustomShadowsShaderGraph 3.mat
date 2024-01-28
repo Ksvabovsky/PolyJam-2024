@@ -20,10 +20,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_CustomShadowsShaderGraph 2
+  m_Name: Shader Graphs_CustomShadowsShaderGraph 3
   m_Shader: {fileID: -6465566751694194690, guid: 5b75c5b3a43c0404289412dcb48a2a65,
     type: 3}
-  m_Parent: {fileID: 0}
+  m_Parent: {fileID: 2100000, guid: 4b94ec986648c6f4ea2c877fda45c54c, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -36,35 +36,12 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 2b0ea6dac3e446449be83663ffe2fa1b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ShadowTexture2D:
-        m_Texture: {fileID: 2800000, guid: 8b53a4fa9ef6002439a8062d0c1b23c5, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _ShadowStep: 0.92
+    - _ShadowStep: 19
     m_Colors:
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShadowColor: {r: 1, g: 1, b: 1, a: 0}
-    - _ShadowPatternColor: {r: 0, g: 0, b: 0, a: 0}
-    - _ShadowTextureTiling: {r: -0.13, g: 51.43, b: 0, a: 0}
+    - _MainColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ShadowColor: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 0}
+    - _ShadowTextureTiling: {r: 5, g: 5, b: 0, a: 0}
   m_BuildTextureStacks: []
