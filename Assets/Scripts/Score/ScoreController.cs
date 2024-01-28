@@ -11,7 +11,7 @@ public class ScoreController : MonoBehaviour
     List<SetController> SetList = new List<SetController>();
     BoardManager Board;
     public Scrollbar ScoreScrollbar;
-    int Score;
+    public int Score;
 
     void Start()
     {
