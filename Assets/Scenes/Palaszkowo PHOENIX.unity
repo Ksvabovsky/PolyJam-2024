@@ -1556,7 +1556,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1e026cdf37b71414b987c3d6661fbeff, type: 2}
+  - {fileID: 2100000, guid: ddc39449d6046d74eb16638fe8ce372f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1947,6 +1947,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1461304994638716399, guid: b87ce6f4e8269e2479959be4da4d900e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6fa4e83d3904c4e41a32a8f188689b61, type: 2}
+    - target: {fileID: -1386464410626389384, guid: b87ce6f4e8269e2479959be4da4d900e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4b94ec986648c6f4ea2c877fda45c54c, type: 2}
+    - target: {fileID: -804731622281664130, guid: b87ce6f4e8269e2479959be4da4d900e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6fa4e83d3904c4e41a32a8f188689b61, type: 2}
     - target: {fileID: 919132149155446097, guid: b87ce6f4e8269e2479959be4da4d900e,
         type: 3}
       propertyPath: m_Name
@@ -2877,6 +2892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards: []
+  Slots: []
+  highlights: []
 --- !u!1 &1512736038
 GameObject:
   m_ObjectHideFlags: 0
