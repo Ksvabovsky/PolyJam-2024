@@ -41,8 +41,9 @@ public class DrawPileController : MonoBehaviour
 
         currentGrow = transform.position;
         growDirection.y = 0.01f;
-
+        Debug.Log("Awake draw pile");
         List<GameObject> cardPoolCards = cardPool.getPool();
+        Debug.Log("Awake draw pile - getPool();");
 
 
         for (int i = 0; i < cardPoolCards.Count; i++)
