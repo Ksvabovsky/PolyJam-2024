@@ -14,10 +14,6 @@ public class DrawPileController : MonoBehaviour
     private Vector3 growDirection = Vector3.zero;
     private Vector3 currentGrow = Vector3.zero;
 
-    private void Awake()
-    {
-        instance = this;
-    }
 
     public void addCard(GameObject card)
     {
@@ -39,8 +35,10 @@ public class DrawPileController : MonoBehaviour
     }
 
 
-    void Start()
+    void Awake()
     {
+        instance = this;
+
         currentGrow = transform.position;
         growDirection.y = 0.01f;
 

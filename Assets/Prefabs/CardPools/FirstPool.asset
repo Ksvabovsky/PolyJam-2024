@@ -14,45 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPool:
   - {fileID: 4105435647811979384, guid: c04188b83d5c5094fb399ed6f301f64d, type: 3}
-  - {fileID: 4105435647811979384, guid: c04188b83d5c5094fb399ed6f301f64d, type: 3}
-  - {fileID: 4105435647811979384, guid: 7a6b8d2c02f257d41934f05825f89f90, type: 3}
+  - {fileID: 4105435647811979384, guid: fdc29e062baa37941bb25744f8710008, type: 3}
   - {fileID: 4105435647811979384, guid: 7a6b8d2c02f257d41934f05825f89f90, type: 3}
   - {fileID: 4105435647811979384, guid: 20b5fd61740cee44dadb6f8b53f8d86c, type: 3}
   - {fileID: 4105435647811979384, guid: c0c30208272f0ae42b87d9aac53e3d65, type: 3}
-  - {fileID: 4105435647811979384, guid: c0c30208272f0ae42b87d9aac53e3d65, type: 3}
-  - {fileID: 4105435647811979384, guid: 19abc9d7014ef7e4f832c4578c0e73ac, type: 3}
-  - {fileID: 4105435647811979384, guid: 19abc9d7014ef7e4f832c4578c0e73ac, type: 3}
+  - {fileID: 4105435647811979384, guid: a267e92b93ba0e240940c9e24e4bb72f, type: 3}
+  - {fileID: 4105435647811979384, guid: 489b006abd8c19d4780ff86f5f69ab14, type: 3}
+  - {fileID: 4105435647811979384, guid: e43943da2438d7549ab6c92c752232ef, type: 3}
+  - {fileID: 4105435647811979384, guid: ab5f71a0529a846419c340bbb48bd94e, type: 3}
   - {fileID: 4105435647811979384, guid: 363a01ef5101fdb43bfa5141a89b6b72, type: 3}
-  - {fileID: 4105435647811979384, guid: 60cbbdd19dac659448887f4e9aad1447, type: 3}
-  - {fileID: 4105435647811979384, guid: 5c23d93c7260bab4181c1e1111066bb4, type: 3}
-  - {fileID: 4105435647811979384, guid: 91bca3d79d6c3d74096b118e853b4552, type: 3}
-  - {fileID: 4105435647811979384, guid: 91bca3d79d6c3d74096b118e853b4552, type: 3}
-  - {fileID: 4105435647811979384, guid: 6476608b1f5c2384b8552d72f477eaa8, type: 3}
-  - {fileID: 4105435647811979384, guid: 6476608b1f5c2384b8552d72f477eaa8, type: 3}
-  - {fileID: 4105435647811979384, guid: 80f794f1675c3974695e5eef8fe8b1e4, type: 3}
-  - {fileID: 4105435647811979384, guid: e53f48866d64b45459f5cbe5a6d84e63, type: 3}
-  - {fileID: 4105435647811979384, guid: 153825dcf4fe4434d9790d972bbdd390, type: 3}
-  - {fileID: 4105435647811979384, guid: 35c783e7685bcd9429f9b485f57dbc69, type: 3}
-  - {fileID: 4105435647811979384, guid: d869ba14c0b9d7642bd4ffe60794958e, type: 3}
-  - {fileID: 4105435647811979384, guid: 4493a92ad2024ee4682f83a2d863715e, type: 3}
-  - {fileID: 4105435647811979384, guid: 7dc354ed24910144db33703e8c4fd5a9, type: 3}
-  - {fileID: 4105435647811979384, guid: 7dc354ed24910144db33703e8c4fd5a9, type: 3}
-  - {fileID: 4105435647811979384, guid: 7dc354ed24910144db33703e8c4fd5a9, type: 3}
+  - {fileID: 4105435647811979384, guid: 33eeed4b64209c8499981916b2727028, type: 3}
   - {fileID: 4105435647811979384, guid: 19befe51735d18c4081a3e569212c776, type: 3}
+  - {fileID: 4105435647811979384, guid: 153825dcf4fe4434d9790d972bbdd390, type: 3}
   cardPoolCopy:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
