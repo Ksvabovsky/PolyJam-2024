@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: StudentDebil
   m_EditorClassIdentifier: 
   id: 9
-  nameText: Kaczor
+  nameText: Student Depil
   descriptionText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
   cardSprite: {fileID: 2800000, guid: e7c27a9111bf36542a8e20a6a7d1acd7, type: 3}
   cardFrontSprite: {fileID: 2800000, guid: 86cc003ec58916b49bffe4550c73e405, type: 3}
   nextCard: {fileID: 0}
   funScore: 5
   cardType: 0
-  synergyType: 
+  synergyType: 07000000
   acionInvoker:
     m_PersistentCalls:
       m_Calls: []

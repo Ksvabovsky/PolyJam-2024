@@ -17,7 +17,7 @@ public class CardTemplate : ScriptableObject
 
     public int funScore;
     public ECardTypes cardType;
-    public List<ECardTypes> synergyType;
+    public List<ECardSynergies> synergyType;
 
     public UnityEvent acionInvoker;
     public void AddCard(CardTemplate card)

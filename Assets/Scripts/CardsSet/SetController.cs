@@ -115,13 +115,12 @@ public class SetController : Highlightable
         CardTemplate card2Properties = card2.GetComponent<CardDisplay>().card;
         int synergies = 0;
 
-        if (card1Properties.synergyType.Contains(card2Properties.cardType))
+        foreach(ECardSynergies synergy in card1Properties.synergyType)
         {
-            synergies++;
-        }
-        if (card2Properties.synergyType.Contains(card1Properties.cardType))
-        {
-            synergies++;
+            if (card2Properties.synergyType.Contains(synergy))
+            {
+                synergies++;
+            }
         }
 
         return synergies;
