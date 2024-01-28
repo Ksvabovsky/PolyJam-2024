@@ -64,6 +64,8 @@ MonoBehaviour:
   - {fileID: 4105435647811979384, guid: e53f48866d64b45459f5cbe5a6d84e63, type: 3}
   - {fileID: 4105435647811979384, guid: 153825dcf4fe4434d9790d972bbdd390, type: 3}
   - {fileID: 4105435647811979384, guid: 7dc354ed24910144db33703e8c4fd5a9, type: 3}
+  - {fileID: 4105435647811979384, guid: 7dc354ed24910144db33703e8c4fd5a9, type: 3}
+  - {fileID: 4105435647811979384, guid: 7dc354ed24910144db33703e8c4fd5a9, type: 3}
   cardPoolCopy:
   - {fileID: 0}
   - {fileID: 0}
