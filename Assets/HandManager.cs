@@ -6,6 +6,9 @@ using UnityEngine.Rendering.Universal;
 
 public class HandManager : MonoBehaviour
 {
+
+    public static HandManager instance;
+
     private Camera cam;
     [SerializeField] private CameraController controller;
     [SerializeField] private DeckManager deck;
@@ -29,7 +32,7 @@ public class HandManager : MonoBehaviour
 
     private void Awake()
     {
-        
+        instance = this;
     }
 
     private void Start()
@@ -161,8 +164,7 @@ public class HandManager : MonoBehaviour
         {
             Debug.Log("Drop Card is highlited");
             Debug.Log("highlitedObject " + highlitedObject.name);
-            if (highlitedObject.GetComponent<SlotScript>() && 
-                highlitedObject.GetComponent<SetController>().CanCardBePlaced(ObjectInHand))
+            if (highlitedObject.GetComponent<SetController>().CanCardBePlaced(ObjectInHand))
             {
                 Debug.Log("Drop Card isSlot and Set");
                 SetController setController = highlitedObject.GetComponent<SetController>();
@@ -185,6 +187,11 @@ public class HandManager : MonoBehaviour
 
         isHolding = false;
         ObjectInHand = null;
+        
+        if (highlitedObject != null)
+        {
+            highlitedObject.GetComponent<Highlightable>().DeHighlightMe();
+        }
         highlitedObject = null;
         input.LeftClick += Interact;
         input.LeftClickRelase -= DropCard;
@@ -204,6 +211,11 @@ public class HandManager : MonoBehaviour
         ObjectInHand.transform.localEulerAngles = Vector3.zero;
         setController.AddCard(ObjectInHand);
         deck.CardWasTaken(ObjectInHand);
+    }
+
+    public GameObject GetCard()
+    {
+        return ObjectInHand;
     }
 }
 

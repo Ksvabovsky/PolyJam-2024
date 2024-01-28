@@ -4,20 +4,41 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SetController : MonoBehaviour
+public class SetController : Highlightable
 {
+    private HandManager handManager;
+
     public List<GameObject> cards = new List<GameObject>();
+    public List<Transform> Slots = new List<Transform>();
+    public List<GameObject> highlights = new List<GameObject>();
+
     // \/zmienna nie u¿ywana
     public event Action<int> AddScore;
     public event Action OnChange;
     private int scoreMultiplier = 1;
     private int setScore = 0;
 
+    private int firstFreeSlot;
+
+
+    public void Start()
+    {
+        handManager = HandManager.instance;
+    }
     public void AddCard(GameObject card)
     {
         cards.Add(card);
         InitializeCard(card);
+
+        Destroy(card.GetComponent<Highlightable>());
+        card.AddComponent<LyingCardHighlight>();
+
         InvokeOnChange();
+        card.transform.parent = Slots[firstFreeSlot].transform;
+        card.transform.localPosition = Vector3.zero;
+        highlights[firstFreeSlot].SetActive(false);
+        firstFreeSlot++;
+        
     }
 
     public void InvokeOnChange()
@@ -158,5 +179,18 @@ public class SetController : MonoBehaviour
         }
         */
         return true;
+    }
+
+    public override void HighlightMe()
+    {
+        if (CanCardBePlaced(handManager.GetCard()))
+        {
+            highlights[firstFreeSlot].SetActive(true);
+        }
+    }
+
+    public override void DeHighlightMe()
+    {
+        highlights[firstFreeSlot].SetActive(false);
     }
 }
