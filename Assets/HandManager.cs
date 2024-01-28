@@ -116,10 +116,13 @@ public class HandManager : MonoBehaviour
 
     private void Interact()
     {
-
-        if (highlitedObject.layer == LayerMask.NameToLayer("Card"))
+        if (highlitedObject != null)
         {
-            TakeCard();
+
+            if (highlitedObject.layer == LayerMask.NameToLayer("Card"))
+            {
+                TakeCard();
+            }
         }
     }
 
@@ -164,6 +167,7 @@ public class HandManager : MonoBehaviour
         {
             Debug.Log("Drop Card is highlited");
             Debug.Log("highlitedObject " + highlitedObject.name);
+            Debug.Log("highlitedObject2 " + highlitedObject.GetComponent<SetController>());
             if (highlitedObject.GetComponent<SetController>().CanCardBePlaced(ObjectInHand))
             {
                 Debug.Log("Drop Card isSlot and Set");
@@ -217,6 +221,8 @@ public class HandManager : MonoBehaviour
     {
         return ObjectInHand;
     }
+
+    
 }
 
 

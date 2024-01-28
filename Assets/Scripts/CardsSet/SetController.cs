@@ -33,6 +33,10 @@ public class SetController : Highlightable
         Destroy(card.GetComponent<Highlightable>());
         card.AddComponent<LyingCardHighlight>();
 
+        if(cards.Count == 4) {
+            Enable2Row();
+        }
+
         InvokeOnChange();
         card.transform.parent = Slots[firstFreeSlot].transform;
         card.transform.localPosition = Vector3.zero;
@@ -76,8 +80,8 @@ public class SetController : Highlightable
         CardTemplate newCardProperties = newCard.GetComponent<CardDisplay>().card;
 
         int connectorAmount = cards.FindAll(x => x.GetComponent<CardDisplay>().card.cardType == ECardTypes.Connector).Count;
-
-        if (connectorAmount == 1) return false;
+        Debug.Log("Card Check0 " + connectorAmount);
+        if (connectorAmount > 1) return false;
         Debug.Log("Card Check " + (int)newCardProperties.cardType + " " + (((int)lastCardProperties.cardType + 1) % cardOrder.Count));
         if((int)newCardProperties.cardType == (((int)lastCardProperties.cardType + 1) % cardOrder.Count)) {
             return true;
@@ -184,6 +188,16 @@ public class SetController : Highlightable
         return true;
     }
 
+
+    void Enable2Row()
+    {
+        for(int i =4;i< 7; i++)
+        {
+            Slots[i].gameObject.SetActive(true);
+
+        }
+    }
+
     public override void HighlightMe()
     {
         if (CanCardBePlaced(handManager.GetCard()))
@@ -194,6 +208,10 @@ public class SetController : Highlightable
 
     public override void DeHighlightMe()
     {
-        highlights[firstFreeSlot].SetActive(false);
+        if (firstFreeSlot < 7)
+        {
+            highlights[firstFreeSlot].SetActive(false);
+        }
     }
+
 }

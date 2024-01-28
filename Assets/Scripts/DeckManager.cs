@@ -78,7 +78,7 @@ public class DeckManager : MonoBehaviour
             {
                 BurnCard();
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
 
         }
         yield break;
@@ -96,7 +96,7 @@ public class DeckManager : MonoBehaviour
 
 
         while (elapsedTime < 1f) {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime *2f;
 
             card.position = Vector3.Lerp(card.position, pos.position,Mathf.Clamp01(elapsedTime));
             card.rotation = Quaternion.Lerp(card.rotation, pos.rotation, Mathf.Clamp01(elapsedTime));
@@ -113,7 +113,7 @@ public class DeckManager : MonoBehaviour
 
         while (elapsedTime < 1f)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime*2;
 
             slotsParent.position = Vector3.Lerp(slotsParent.position, targetPos, Mathf.Clamp01(elapsedTime));
             yield return new WaitForEndOfFrame();
@@ -137,5 +137,16 @@ public class DeckManager : MonoBehaviour
         Debug.Log("Boobs");
     }
 
+    public void RERoll()
+    {
+        foreach (GameObject card in cards)
+        {
+            Destroy(card);
+        }
+        cards.Clear();
+        firstFreeSlot = 0;
+        numberOfCards = 0;
 
+        StartCoroutine(drawCards(8));
+    }
 }
