@@ -1,15 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DrawPileController : MonoBehaviour
 {
     List<GameObject> drawPileCards = new List<GameObject>();
 
+    public static DrawPileController instance;
+
     public CardPoolsTemplate cardPool;
 
     private Vector3 growDirection = Vector3.zero;
     private Vector3 currentGrow = Vector3.zero;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void addCard(GameObject card)
     {
@@ -20,11 +28,12 @@ public class DrawPileController : MonoBehaviour
         currentGrow += growDirection;
     }
 
-    public GameObject getCard(int index)
+    public GameObject getCard()
     {
-        GameObject copy = drawPileCards[index];
-        drawPileCards.RemoveAt(index);
-        currentGrow -= growDirection;
+        GameObject copy = drawPileCards.Last();
+        Debug.Log(copy+" getCard");
+        drawPileCards.RemoveAt(drawPileCards.Count - 1 );
+        //currentGrow -= growDirection;
         return copy;
     }
 

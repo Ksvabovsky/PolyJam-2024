@@ -8,6 +8,7 @@ public class HandManager : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private CameraController controller;
+    [SerializeField] private DeckManager deck;
 
     [SerializeField] private LayerMask Cardmask;
     [SerializeField] private LayerMask Slotmask;
@@ -162,7 +163,9 @@ public class HandManager : MonoBehaviour
                 highlitedObject.GetComponent<SetController>().CanCardBePlaced(ObjectInHand))
             {
                 SetController setController = highlitedObject.GetComponent<SetController>();
+                
                 PutToSlot(setController);
+                
             }
             else
             {
@@ -195,6 +198,7 @@ public class HandManager : MonoBehaviour
         ObjectInHand.transform.localPosition = Vector3.zero;
         ObjectInHand.transform.localEulerAngles = Vector3.zero;
         setController.AddCard(ObjectInHand);
+        deck.CardWasTaken(ObjectInHand);
     }
 }
 
