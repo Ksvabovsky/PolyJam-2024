@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,8 +6,10 @@ using UnityEngine;
 
 public class SetController : MonoBehaviour
 {
-
     public List<GameObject> cards = new List<GameObject>();
+    // \/zmienna nie u¿ywana
+    public event Action<int> AddScore;
+    public event Action OnChange;
     private int scoreMultiplier = 1;
     private int setScore = 0;
 
@@ -14,10 +17,22 @@ public class SetController : MonoBehaviour
     {
         cards.Add(card);
         InitializeCard(card);
+        InvokeOnChange();
+    }
+
+    public void InvokeOnChange()
+    {
+        OnChange?.Invoke();
+    } 
+
+    public void InvokeAddScore(int score)
+    {
+        AddScore.Invoke(score);
     }
 
     public bool CanCardBePlaced(GameObject newCard)
     {
+        Debug.Log("can it?");
         List<ECardTypes> cardOrder = new List<ECardTypes> {
             ECardTypes.Person,
             ECardTypes.Action,
@@ -42,12 +57,25 @@ public class SetController : MonoBehaviour
         int connectorAmount = cards.FindAll(x => x.GetComponent<CardDisplay>().card.cardType == ECardTypes.Connector).Count;
 
         if (connectorAmount == 1) return false;
-        Debug.Log((int)newCardProperties.cardType + " " + (((int)lastCardProperties.cardType + 1) % cardOrder.Count));
+        Debug.Log("Card Check " + (int)newCardProperties.cardType + " " + (((int)lastCardProperties.cardType + 1) % cardOrder.Count));
         if((int)newCardProperties.cardType == (((int)lastCardProperties.cardType + 1) % cardOrder.Count)) {
             return true;
         }
 
         return false;
+    }
+
+    public int CalculatePoints()
+    {
+        CheckSetSynergies();
+        int sum = 0;
+        foreach (GameObject cardObject in cards)
+        {
+            CardTemplate card = cardObject.GetComponent<CardDisplay>().card;
+            sum += card.funScore;
+        }
+        sum *= scoreMultiplier; 
+        return sum;
     }
 
     public int CheckSetSynergies() 
@@ -57,7 +85,6 @@ public class SetController : MonoBehaviour
             int synergyAmount = CountCardSynergy(cards[i-1], cards[i]);
             scoreMultiplier += synergyAmount;
         } 
-
         return 0;
     }
 

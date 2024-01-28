@@ -27,13 +27,13 @@ public class InputReader : MonoBehaviour,Controls.IBasicActions
         if (context.started) 
         {
             LeftClick.Invoke();
-            Debug.Log("Dupa");
+            //Debug.Log("Dupa");
         }
 
         if(LeftClickRelase != null && context.canceled)
         {
             LeftClickRelase.Invoke();
-            Debug.Log("jebana");
+            //Debug.Log("jebana");
         }
     }
 
