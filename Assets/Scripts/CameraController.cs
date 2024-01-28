@@ -12,11 +12,15 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform DeckPos;
     [SerializeField] private Transform TablePos;
 
+    [SerializeField] private Transform peekButton;
+    [SerializeField] private Transform backFromPeekButton;
+
     bool lookAtDeck;
 
-    private void Start()
+    private void Awake()
     {
         lookAtDeck = true;
+        backFromPeekButton.gameObject.SetActive(false);
     }
 
     public void MoveToDeck()
@@ -26,6 +30,9 @@ public class CameraController : MonoBehaviour
             cam.position = DeckPos.position;
             cam.rotation = DeckPos.rotation;
             lookAtDeck = true;
+
+            backFromPeekButton.gameObject.SetActive(false);
+            peekButton.gameObject.SetActive(true);
         }
     }
 
@@ -36,6 +43,9 @@ public class CameraController : MonoBehaviour
             cam.position = TablePos.position;
             cam.rotation = TablePos.rotation;
             lookAtDeck = false;
+
+            backFromPeekButton.gameObject.SetActive(true);
+            peekButton.gameObject.SetActive(false);
         }
     }
 

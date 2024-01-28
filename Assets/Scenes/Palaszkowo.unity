@@ -1541,9 +1541,9 @@ RectTransform:
   - {fileID: 187129400}
   m_Father: {fileID: 1476238066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 398, y: -138.3}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -85.89996, y: -25}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &354117737
@@ -2277,9 +2277,9 @@ RectTransform:
   - {fileID: 1114810608}
   m_Father: {fileID: 1476238066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 398, y: -101}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -85.89996, y: -25}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &597423976
@@ -4698,6 +4698,8 @@ MonoBehaviour:
   cam: {fileID: 251332205}
   DeckPos: {fileID: 94521956}
   TablePos: {fileID: 71837650}
+  peekButton: {fileID: 597423975}
+  backFromPeekButton: {fileID: 354117736}
 --- !u!4 &1772075256
 Transform:
   m_ObjectHideFlags: 0
