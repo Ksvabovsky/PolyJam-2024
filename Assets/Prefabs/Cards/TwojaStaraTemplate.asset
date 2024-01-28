@@ -20,8 +20,8 @@ MonoBehaviour:
   nextCard: {fileID: 0}
   funScore: 0
   cardType: 1
-  synergyType: 0
-  onDoSomething:
+  synergyType: 
+  acionInvoker:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}

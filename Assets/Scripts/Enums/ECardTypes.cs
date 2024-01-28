@@ -5,8 +5,8 @@ using UnityEngine;
 public enum ECardTypes
 {
     Person,
-    Location,
     Action,
+    Location,
     Connector,
     Spell    
 }

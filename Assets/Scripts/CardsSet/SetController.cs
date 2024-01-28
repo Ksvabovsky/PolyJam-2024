@@ -6,7 +6,7 @@ using UnityEngine;
 public class SetController : MonoBehaviour
 {
 
-    List<GameObject> cards = new List<GameObject>();
+    public List<GameObject> cards = new List<GameObject>();
     private int scoreMultiplier = 1;
     private int setScore = 0;
 
@@ -24,14 +24,25 @@ public class SetController : MonoBehaviour
             ECardTypes.Location,
             ECardTypes.Connector
         };
+        Debug.Log("CanCarBePlaced 1");
+        if(cards.Count == 0)
+        {
+            if(newCard.GetComponent<CardDisplay>().card.cardType == ECardTypes.Person)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
 
-        CardTemplate lastCardProperties = cards.Last().GetComponent<CardTemplate>();
-        CardTemplate newCardProperties = newCard.GetComponent<CardTemplate>();
+        CardTemplate lastCardProperties = cards.Last().GetComponent<CardDisplay>().card;
+        CardTemplate newCardProperties = newCard.GetComponent<CardDisplay>().card;
 
-        int connectorAmount = cards.FindAll(x => x.GetComponent<CardTemplate>().cardType == ECardTypes.Connector).Count;
+        int connectorAmount = cards.FindAll(x => x.GetComponent<CardDisplay>().card.cardType == ECardTypes.Connector).Count;
 
-        if (connectorAmount == 0) return false;
-
+        if (connectorAmount == 1) return false;
+        Debug.Log((int)newCardProperties.cardType + " " + (((int)lastCardProperties.cardType + 1) % cardOrder.Count));
         if((int)newCardProperties.cardType == (((int)lastCardProperties.cardType + 1) % cardOrder.Count)) {
             return true;
         }
@@ -52,8 +63,8 @@ public class SetController : MonoBehaviour
 
     public int CountCardSynergy(GameObject card1, GameObject card2)
     {
-        CardTemplate card1Properties = card1.GetComponent<CardTemplate>();
-        CardTemplate card2Properties = card2.GetComponent<CardTemplate>();
+        CardTemplate card1Properties = card1.GetComponent<CardDisplay>().card;
+        CardTemplate card2Properties = card2.GetComponent<CardDisplay>().card;
         int synergies = 0;
 
         if (card1Properties.synergyType.Contains(card2Properties.cardType))
@@ -70,7 +81,7 @@ public class SetController : MonoBehaviour
     
     public void InitializeCard(GameObject card)
     {
-        card.GetComponent<CardTemplate>().InvokeAction();
+        card.GetComponent<CardDisplay>().card.InvokeAction();
     }
 
 
