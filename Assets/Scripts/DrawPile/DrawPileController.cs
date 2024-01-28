@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DrawPileController : MonoBehaviour
 {
-    List<GameObject> drawPileCards = new List<GameObject>();
+    public List<GameObject> drawPileCards = new List<GameObject>();
 
     public static DrawPileController instance;
 
@@ -30,6 +30,7 @@ public class DrawPileController : MonoBehaviour
 
     public GameObject getCard()
     {
+        Debug.Log(drawPileCards);
         GameObject copy = drawPileCards.Last();
         Debug.Log(copy+" getCard");
         drawPileCards.RemoveAt(drawPileCards.Count - 1 );

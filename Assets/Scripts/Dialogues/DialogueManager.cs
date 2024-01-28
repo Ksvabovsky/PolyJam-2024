@@ -11,6 +11,12 @@ public class DialogueManager : MonoBehaviour
     public AudioSource audioSource;
     Queue<string> dialogueQueue = new Queue<string>();
     public CharacterTemplate currentTalkingCharacter;
+    public DialogueContainer dialogueContainer;
+
+    public void StartClownMoodDialogue(EClownMood clownMood)
+    {
+        StartDialogue(dialogueContainer.GetDialogueBasedOnMood(clownMood));
+    }
 
     public void StartDialogue(Dialogue dialogueList)
     {

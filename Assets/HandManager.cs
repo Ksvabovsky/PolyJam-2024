@@ -156,12 +156,15 @@ public class HandManager : MonoBehaviour
     {
 
         controller.MoveToDeck();
+        Debug.Log("Drop Card outif");
         if (highlitedObject)
         {
-            
+            Debug.Log("Drop Card is highlited");
+            Debug.Log("highlitedObject " + highlitedObject.name);
             if (highlitedObject.GetComponent<SlotScript>() && 
                 highlitedObject.GetComponent<SetController>().CanCardBePlaced(ObjectInHand))
             {
+                Debug.Log("Drop Card isSlot and Set");
                 SetController setController = highlitedObject.GetComponent<SetController>();
                 
                 PutToSlot(setController);
@@ -169,11 +172,13 @@ public class HandManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("Drop Card isNotSlot and notSet");
                 returnToHand();
             }
         }
         else
         {
+            Debug.Log("Drop Card is not higlighted");
             returnToHand();
         }
 
