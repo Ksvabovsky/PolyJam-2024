@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform peekButton;
     [SerializeField] private Transform backFromPeekButton;
 
-    bool lookAtDeck;
+    public static bool lookAtDeck;
 
     private void Awake()
     {
