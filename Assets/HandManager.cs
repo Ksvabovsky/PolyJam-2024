@@ -25,6 +25,7 @@ public class HandManager : MonoBehaviour
 
     [SerializeField] private bool isHandFree = true;
     [SerializeField] private bool isHolding;
+    AudioManager audioManager;
 
     private const float RaycastRange = 100f;
 
@@ -33,6 +34,7 @@ public class HandManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void Start()
@@ -105,6 +107,7 @@ public class HandManager : MonoBehaviour
                 if (highlitedObject.GetComponent<Highlightable>())
                 {
                     highlitedObject.GetComponent<Highlightable>().HighlightMe();
+                    audioManager.PlaySFX(audioManager.highlightCardSFX);
                 }
 
             }
