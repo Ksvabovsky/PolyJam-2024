@@ -19,7 +19,7 @@ MonoBehaviour:
   cardFrontSprite: {fileID: 2800000, guid: f22fe7f89058f1b498b446b1ecd4f7b0, type: 3}
   nextCard: {fileID: 0}
   funScore: 2
-  cardType: 2
+  cardType: 1
   synergyType: 
   acionInvoker:
     m_PersistentCalls:
