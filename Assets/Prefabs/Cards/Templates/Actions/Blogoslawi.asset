@@ -20,7 +20,7 @@ MonoBehaviour:
   nextCard: {fileID: 0}
   funScore: 5
   cardType: 1
-  synergyType: 
+  synergyType: 010000000a000000
   acionInvoker:
     m_PersistentCalls:
       m_Calls: []
