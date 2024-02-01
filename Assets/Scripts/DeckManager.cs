@@ -149,4 +149,10 @@ public class DeckManager : MonoBehaviour
 
         StartCoroutine(drawCards(8));
     }
+
+    public void drawCard()
+    {
+        StartCoroutine(drawCards(1));
+    }
+
 }

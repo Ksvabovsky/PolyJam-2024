@@ -14,6 +14,7 @@ public class CardDisplay : MonoBehaviour
     public RawImage sprite;
     public RawImage frontSprite;
     public CardTemplate card;
+    public EffectsManager effectsManager;
 
     private float maxHoverDistance = 0.3f;
     public float moveByDistance = 0.0f;
@@ -40,6 +41,7 @@ public class CardDisplay : MonoBehaviour
         rotationSpeed = 140.0f;
         hoverSpeed = 5.0f;
 
+        effectsManager = FindObjectOfType<EffectsManager>();
         card.InvokeAction();
     }
 
@@ -114,6 +116,11 @@ public class CardDisplay : MonoBehaviour
             }
         }
         
+    }
+
+    public void OnStart()
+    {
+        effectsManager.DoEffect();
     }
 
     public void startHovering()

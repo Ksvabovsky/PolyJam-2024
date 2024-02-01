@@ -20,7 +20,6 @@ public class SetController : Highlightable
 
     private int firstFreeSlot;
 
-
     public void Start()
     {
         handManager = HandManager.instance;
@@ -136,7 +135,8 @@ public class SetController : Highlightable
     
     public void InitializeCard(GameObject card)
     {
-        card.GetComponent<CardDisplay>().card.InvokeAction();
+        //card.GetComponent<CardDisplay>().card.InvokeAction();
+        card.GetComponent<CardDisplay>().effectsManager.DoEffect();
     }
 
 
